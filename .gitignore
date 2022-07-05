@@ -1,32 +1,48 @@
-# Prerequisites
-*.d
+# IDE data
+.kdev4
+*.kdev4
+.vs
+.vscode
+/CMakeSettings.json
+.idea
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Generated resources
+src/platform/version.c
+res/version.rc
+res/version.txt
+res/julius.icns
 
-# Precompiled Headers
-*.gch
-*.pch
+# Build output and data directories
+/build*/
+out/
+cmake-build-*
+/data
+/ext/SDL2/**
+*~
+*.swp
+/android
+# Android
+*.iml
+.gradle
+local.properties
+.DS_Store
+/captures
+.externalNativeBuild
+.cxx/
+distribution/
+*.log
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+/wiki/*
+/ozymandias-extra/*
+/ozymandias.wiki/*
+doc
+/doc/*
+*.ods#
 
-# Fortran module files
-*.mod
-*.smod
+*.lnk
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Tools
+/tools/*
+!/tools/*.zip
+!/tools/*.7z
 
-# Executables
-*.exe
-*.out
-*.app
