@@ -1,0 +1,3 @@
+[submodule "ext/SDL2"]
+	path = ext/SDL2
+	url = https://github.com/davidsiaw/SDL2.git
