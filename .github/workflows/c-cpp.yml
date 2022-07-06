@@ -2,24 +2,38 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main-ci" ]
 
 jobs:
-  build-on-ubuntu:
 
-    runs-on: ubuntu-latest
+  build-test:
+    name: ${ { matrix.config.name } }
+    runs-on: ${ { matrix.config.os } }
+    strategy:
+      fail-fast: false
+      matrix: 
+        config: 
+          - 
+            name: "Ubuntu (GCC)"
+           # artifact: Linux.tar.xz
+           # build_type: Release
+            cc: gcc
+            cxx: g++
+            os: ubuntu-latest
+          -
+            name: "Test"
 
     steps:
-    - uses: actions/checkout@v3
+    - name: "Checkout repo branch"
+      uses: actions/checkout@v3
     
-    - name: configure
-      run: ./configure
+    - name: "Setup CMake"
+      uses: jwlawson/actions-setup-cmake@v1.12
+      with:
+        cmake-version: '3.16.x'
     
-    - name: make
-      run: make
+    - name: "Report CMake version"
+      shell: cmake -P {0}
+      run: |
+        message(STATUS "Using host CMake version: ${CMAKE_VERSION}")
     
-    - name: make check
-      run: make check
-    
-    - name: make distcheck
-      run: make distcheck
