@@ -20,8 +20,6 @@ jobs:
             cc: gcc
             cxx: g++
             os: ubuntu-latest
-          -
-            name: "Test"
 
     steps:
     - name: "Checkout repo branch"
@@ -31,9 +29,4 @@ jobs:
       uses: jwlawson/actions-setup-cmake@v1.12
       with:
         cmake-version: '3.16.x'
-    
-    - name: "Report CMake version"
-      shell: cmake -P {0}
-      run: |
-        message(STATUS "Using host CMake version: ${CMAKE_VERSION}")
     
