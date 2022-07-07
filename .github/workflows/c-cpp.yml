@@ -26,7 +26,7 @@ jobs:
     - name: "Current configs ECHO:"
       shell: cmd
       run: |
-        echo "Matrix OS: ${{ matrix.config.os }}"
+        echo "Matrix OS: $env:RUNNER_OS"
         echo "Context: ${{ toJSON(github) }}"
       
     - name: "Checkout repo branch"
