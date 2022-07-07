@@ -13,21 +13,21 @@ jobs:
       fail-fast: false
       matrix: 
         config: 
-          - 
-            name: "Windows (MinGW)"
-           # artifact: ozy2.exe
-           # build_type: Release
+          - name: "Windows (MinGW)"
+            # artifact: ozy2.exe
+            # build_type: Release
             cc: gcc
             cxx: g++
-            os: [self-hosted, windows]
-
+            os: ban_win10
+            
     steps:
-    - run: 'echo "Matrix OS: ${{ matrix.os }}"'
+    - shell: cmd
+      run: 'echo "Matrix OS: ${{ matrix.os }}"'
+      
     - name: "Checkout repo branch"
       uses: actions/checkout@v3
     
     - name: "Setup CMake"
       uses: jwlawson/actions-setup-cmake@v1.12
       with:
-        cmake-version: '3.16.x'
-    
+        cmake-version: '3.16.x'      
