@@ -16,8 +16,10 @@ jobs:
           - name: "Windows (MinGW)"
             # artifact: ozy2.exe
             # build_type: Release
-            cc: gcc
-            cxx: g++
+            #cc: gcc
+            #cxx: g++
+            cc: C:\mingw-w64-9.0.0\bin\gcc
+            cxx: C:\mingw-w64-9.0.0\bin\g++
             os: [self-hosted, windows]
             
     steps:
@@ -47,8 +49,8 @@ jobs:
     - name: "Build with CMake"
       uses: ashutoshvarma/action-cmake-build@master
       with:
-        gcc: C:\mingw-w64-9.0.0\bin\gcc
-        g++: C:\mingw-w64-9.0.0\bin\g++
+        #gcc: C:\mingw-w64-9.0.0\bin\gcc
+        #g++: C:\mingw-w64-9.0.0\bin\g++
       
         build-dir: ${{ runner.workspace }}/build
         # will set the CC & CXX for cmake
