@@ -33,7 +33,7 @@ jobs:
       
     - name: "Setup GCC buildfiles with CMake"
       shell: cmd
-      run: >
+      run: |
         mkdir build
         cd build
         cmake .. -G "MinGW Makefiles"
