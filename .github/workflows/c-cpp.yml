@@ -26,46 +26,27 @@ jobs:
     - shell: cmd
       run: 'echo "Matrix OS: ${{ matrix.os }}"'
       
+    - name: "Cleanup workspace"
+      uses: AutoModality/action-clean@v1
+      
     - name: "Checkout repo branch"
       uses: actions/checkout@v3
       with:
         submodules: recursive
       
-    #- name: "Checkout submodules"
-    #  uses: textbook/git-checkout-submodule-action@master
-    
-    #- name: "Setup CMake"
-    #  uses: jwlawson/actions-setup-cmake@v1.12
-    #  with:
-    #    cmake-version: '3.16.x'
-    
-    #- name: "Set up MinGW"
-    #  run: echo "C:\mingw-w64-9.0.0\bin" >> $GITHUB_PATH
-        
-    #  uses: egor-tensin/setup-mingw@v2
-    #  with:
-    #    platform: x64
-    
-    - name: "Build with CMake"
-      uses: ashutoshvarma/action-cmake-build@master
-      with:
-        #gcc: C:\mingw-w64-9.0.0\bin\gcc
-        #g++: C:\mingw-w64-9.0.0\bin\g++
+    - name: "Setup GCC buildfiles with CMake"
+      shell: cmd
+      run: >
+        mkdir build
+        cd build
+        cmake .. -G "MinGW Makefiles"
+      # cd ..
       
-        build-dir: ${{ runner.workspace }}/build
-        # will set the CC & CXX for cmake
-        cc: gcc
-        cxx: g++
-        # build-type: Release
-        # Extra options pass to cmake while configuring project
-        configure-options: -DCMAKE_C_FLAGS=-w32 -DPNG_INCLUDE=OFF
-        # run-test: true
-        # ctest-options: -R mytest
-        # install the build using cmake --install
-        # install-build: true
-        # run build using '-j [parallel]' to use multiple threads to build
-        parallel: 14
-        
+    - name: "Compile with MinGW"
+      shell: cmd
+      run: cmake --build build
+      
+      
         
         
         
