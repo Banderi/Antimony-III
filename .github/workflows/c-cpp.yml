@@ -7,21 +7,22 @@ on:
 jobs:
 
   build-test:
-    name: ${ { matrix.config.name } }
-    runs-on: ${ { matrix.config.os } }
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
     strategy:
       fail-fast: false
       matrix: 
         config: 
           - 
-            name: "Ubuntu (GCC)"
-           # artifact: Linux.tar.xz
+            name: "Windows (MinGW)"
+           # artifact: ozy2.exe
            # build_type: Release
             cc: gcc
             cxx: g++
-            os: ubuntu-latest
+            os: [self-hosted, windows]
 
     steps:
+    - run: 'echo "Matrix OS: ${{ matrix.os }}"'
     - name: "Checkout repo branch"
       uses: actions/checkout@v3
     
