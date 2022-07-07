@@ -23,8 +23,11 @@ jobs:
             os: [self-hosted, windows]
             
     steps:
-    - shell: cmd
-      run: 'echo "Matrix OS: ${{ matrix.os }}"'
+    - name: "Current configs ECHO:"
+      shell: cmd
+      run: |
+        echo "Matrix OS: ${{ matrix.os }}"
+        echo "$PATH"
       
     - name: "Checkout repo branch"
       uses: actions/checkout@v3
