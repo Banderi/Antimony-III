@@ -18,7 +18,7 @@ jobs:
             # build_type: Release
             cc: gcc
             cxx: g++
-            os: ban_win10
+            os: [self-hosted, windows]
             
     steps:
     - shell: cmd
