@@ -37,8 +37,9 @@ jobs:
     #  with:
     #    cmake-version: '3.16.x'
     
-    - name: "Set up MinGW"
-      run: echo "C:\mingw-w64-9.0.0\bin" >> $GITHUB_PATH
+    #- name: "Set up MinGW"
+    #  run: echo "C:\mingw-w64-9.0.0\bin" >> $GITHUB_PATH
+        
     #  uses: egor-tensin/setup-mingw@v2
     #  with:
     #    platform: x64
@@ -46,6 +47,9 @@ jobs:
     - name: "Build with CMake"
       uses: ashutoshvarma/action-cmake-build@master
       with:
+        gcc: C:\mingw-w64-9.0.0\bin\gcc
+        g++: C:\mingw-w64-9.0.0\bin\g++
+      
         build-dir: ${{ runner.workspace }}/build
         # will set the CC & CXX for cmake
         cc: gcc
