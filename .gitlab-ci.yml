@@ -1,0 +1,44 @@
+# This file is a template, and might need editing before it works on your project.
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/C++.gitlab-ci.yml
+
+# use the official gcc image, based on debian
+# can use versions as well, like gcc:5.2
+# see https://hub.docker.com/_/gcc/
+
+stages:
+  - prepare
+  - build
+  #- test
+  #- deploy
+
+image: gcc
+
+# install the necessary build tools when needed
+prepare:
+  stage: prepare # why oh god why is it structured like this
+  script:
+     #- apt update && apt -y install make autoconf
+     - apt-get update --yes
+     - apt-get install --yes cmake
+
+# attempt building using CMake & CMakeLists.txt
+build:
+  stage: build # reeeee
+  script:
+    - echo "Test"
+    #- g++ helloworld.cpp -o mybinary
+  artifacts: # the final outputs!
+    paths:
+      - artifacts
+  cache: # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
+    paths:
+      - "*.o"
+
+# run tests using the binary built before
+#test:
+#  stage: test
+#  script:
+#    - ./runmytests.sh

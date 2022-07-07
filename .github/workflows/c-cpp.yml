@@ -2,24 +2,50 @@ name: C/C++ CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main-ci" ]
 
 jobs:
-  build-on-ubuntu:
 
-    runs-on: ubuntu-latest
-
+  build-test:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix: 
+        config: 
+          - name: "Windows (MinGW)"
+            # artifact: ozy2.exe
+            # build_type: Release
+            #cc: gcc
+            #cxx: g++
+            cc: C:\mingw-w64-9.0.0\bin\gcc
+            cxx: C:\mingw-w64-9.0.0\bin\g++
+            os: [self-hosted, windows]
+            
     steps:
-    - uses: actions/checkout@v3
     
-    - name: configure
-      run: ./configure
-    
-    - name: make
-      run: make
-    
-    - name: make check
-      run: make check
-    
-    - name: make distcheck
-      run: make distcheck
+    - name: "Checkout repo branch"
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+      
+    - name: "Setup GCC buildfiles with CMake"
+      shell: cmd
+      run: |
+        mkdir build
+        cd build
+        cmake .. -G "MinGW Makefiles"
+      # cd ..
+      
+    - name: "Compile with MinGW"
+      shell: cmd
+      run: cmake --build build
+      
+      
+        
+        
+        
+        
+        
+        
+        
