@@ -23,12 +23,7 @@ jobs:
             os: [self-hosted, windows]
             
     steps:
-    - name: "Current configs ECHO:"
-      shell: cmd
-      run: |
-        echo "Matrix OS: $env:RUNNER_OS"
-        echo "Context: ${{ toJSON(github) }}"
-      
+    
     - name: "Checkout repo branch"
       uses: actions/checkout@v3
       with:
