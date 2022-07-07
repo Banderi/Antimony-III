@@ -26,9 +26,6 @@ jobs:
     - shell: cmd
       run: 'echo "Matrix OS: ${{ matrix.os }}"'
       
-    - name: "Cleanup workspace"
-      uses: AutoModality/action-clean@v1
-      
     - name: "Checkout repo branch"
       uses: actions/checkout@v3
       with:
