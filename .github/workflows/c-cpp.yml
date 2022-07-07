@@ -38,9 +38,11 @@ jobs:
     #    cmake-version: '3.16.x'
     
     - name: "Set up MinGW"
-      uses: egor-tensin/setup-mingw@v2
-      with:
-        platform: x64
+      shell: bash
+      run: echo "C:\mingw-w64-9.0.0\bin" >> $GITHUB_PATH
+    #  uses: egor-tensin/setup-mingw@v2
+    #  with:
+    #    platform: x64
     
     - name: "Build with CMake"
       uses: ashutoshvarma/action-cmake-build@master
