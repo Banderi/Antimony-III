@@ -23,6 +23,7 @@ target_include_directories(Antimony3 PRIVATE ${LIBS_DIR}/include)
 target_link_directories(Antimony3 PRIVATE ${LIBS_DIR}/lib)
 message("Project build set for: ${ARCH}")
 message("Library inclusion path: ${LIBS_DIR}")
+message("Build type: ${CMAKE_BUILD_TYPE}")
 
 ### Ozymandias
 project(Ozymandias2)
@@ -37,19 +38,26 @@ target_link_options(Ozymandias2 PRIVATE -static-libgcc -static-libstdc++) # link
 target_link_libraries(Ozymandias2 Antimony3) # link to Antimony
 target_link_libraries(Ozymandias2 SDL2) # link to SDL2
 
-# Copy binaries from libraries
+# Copy binaries from the libraries on Windows
 if(CMAKE_HOST_SYSTEM_NAME STREQUAL Windows)
     add_custom_command(
         TARGET Ozymandias2 POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory ${LIBS_DIR}/bin/ ${CMAKE_CURRENT_BINARY_DIR})
-    # Copy outputs to the deployment folder
-    if (CMAKE_BUILD_TYPE STREQUAL Release)
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${LIBS_DIR}/bin/ ${CMAKE_CURRENT_BINARY_DIR}
+        COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan
+        "Copying shared libraries...")
+endif()
+
+# Release artifacts
+if (CMAKE_BUILD_TYPE STREQUAL Release)
+    if(CMAKE_HOST_SYSTEM_NAME STREQUAL Windows)
         set(ARTIFACT_DIR ${CMAKE_SOURCE_DIR}/bin)
         add_custom_command(
             TARGET Ozymandias2 POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory ${LIBS_DIR}/bin/ ${ARTIFACT_DIR}
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Ozymandias2.exe ${ARTIFACT_DIR})
-    endif ()
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Ozymandias2.exe ${ARTIFACT_DIR}
+            COMMAND ${CMAKE_COMMAND} -E cmake_echo_color --cyan
+            "Copying artifacts...")
+    endif()
 endif()
 
 
