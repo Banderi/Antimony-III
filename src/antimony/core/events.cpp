@@ -1,5 +1,5 @@
 #include "events.h"
-#include "SDL2/include/SDL_events.h"
+#include "SDL2/SDL_events.h"
 
 void UpdateEvents() {
     // update mouse
