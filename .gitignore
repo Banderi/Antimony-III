@@ -14,10 +14,9 @@ res/julius.icns
 
 # Build output and data directories
 /build*/
-out/
+/bin/
 cmake-build-*
 /data
-/ext/SDL2/**
 *~
 *.swp
 /android

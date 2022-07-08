@@ -40,9 +40,19 @@ target_link_libraries(Ozymandias2 SDL2) # link to SDL2
 # Copy binaries from libraries
 if(CMAKE_HOST_SYSTEM_NAME STREQUAL Windows)
     add_custom_command(
-        TARGET Ozymandias2
-        POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-        ${LIBS_DIR}/bin/
-        ${CMAKE_CURRENT_BINARY_DIR})
+        TARGET Ozymandias2 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${LIBS_DIR}/bin/ ${CMAKE_CURRENT_BINARY_DIR})
+    # Copy outputs to the deployment folder
+    if (CMAKE_BUILD_TYPE STREQUAL Release)
+        set(ARTIFACT_DIR ${CMAKE_SOURCE_DIR}/bin)
+        add_custom_command(
+            TARGET Ozymandias2 POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory ${LIBS_DIR}/bin/ ${ARTIFACT_DIR}
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/Ozymandias2.exe ${ARTIFACT_DIR})
+    endif ()
 endif()
+
+
+
+
+

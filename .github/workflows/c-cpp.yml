@@ -17,7 +17,7 @@ jobs:
         config: 
           - name: "Windows (MinGW-w64)"
             # artifact: ozy2.exe
-            # build_type: Release
+            build_type: Release
             cc: gcc
             cxx: g++
             os: [self-hosted, windows]
@@ -39,6 +39,12 @@ jobs:
     - name: "Compile with MinGW"
       shell: cmd
       run: cmake --build build
+
+    - name: "Push output binaries as artifact"
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ matrix.config.name }}
+        path: bin/
       
       
         
