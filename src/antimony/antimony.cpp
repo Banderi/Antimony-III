@@ -2,7 +2,6 @@
 #include "core/events.h"
 
 #include <iostream>
-#include <conio.h>
 
 static void Setup() {
     std::cout << "Hello, World!" << std::endl;

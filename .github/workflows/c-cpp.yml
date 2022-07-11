@@ -34,7 +34,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake .. -G "MinGW Makefiles" -DARCH=MINGW64 -DCMAKE_BUILD_TYPE=Release
+        cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
       
     - name: "Compile with MinGW"
       shell: cmd
