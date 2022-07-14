@@ -1,2 +1,2 @@
-rm -rf build
+./clean.sh
 ./build.sh

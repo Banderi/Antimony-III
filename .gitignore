@@ -17,6 +17,7 @@ res/julius.icns
 /bin/
 /artifacts/
 cmake-build-*
+.cache
 /data
 *~
 *.swp
@@ -32,9 +33,12 @@ local.properties
 distribution/
 *.log
 
+# Manual libs
+libs
+
+# Wiki, docs, etc.
 /wiki/*
-/ozymandias-extra/*
-/ozymandias.wiki/*
+/*wiki/*
 doc
 /doc/*
 *.ods#
