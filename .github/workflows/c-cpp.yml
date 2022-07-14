@@ -44,7 +44,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.config.name }}
-        path: bin/
+        path: artifacts/
       
       
         

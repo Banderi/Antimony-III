@@ -15,7 +15,11 @@ SetVar(CPM_USE_LOCAL_PACKAGES ON)
 #SetVar(CPM_LOCAL_PACKAGES_ONLY ON)
 #SetVar(CPM_USE_NAMED_CACHE_DIRECTORIES ON)
 SetVar(CPM_SOURCE_CACHE .cache/CPM)
-file(LOCK ${CPM_SOURCE_CACHE} DIRECTORY GUARD FILE) # fix for parallel CMake runs over the same folders
+# fix for parallel CMake runs over the same folders
+file(LOCK ${CPM_SOURCE_CACHE} DIRECTORY GUARD FILE)
+# set proper output paths for runtime library files (.dll)
+SetVar(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+SetVar(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
 ### *********************************** CCACHE *****************************************
 find_program(CCACHE_TOOL_PATH ccache)
@@ -41,7 +45,6 @@ add_library(Antimony3
     ${PROJECT_SOURCE_DIR}/src/antimony/input/mouse.cpp
     )
 AddDependency(Antimony3 SDL2 "gh:libsdl-org/SDL#release-2.0.22")
-
 
 ## Ozymandias 2.0
 project(Ozymandias2)
