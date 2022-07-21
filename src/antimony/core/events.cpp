@@ -1,8 +1,6 @@
 #include "events.h"
 
-#include <GID_SDL.h>
-#include GID_SDL(SDL_events.h)
-
+#include <SDL2/SDL_events.h>
 
 void UpdateEvents() {
     // update mouse

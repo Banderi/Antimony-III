@@ -70,7 +70,8 @@ endfunction()
 function(AddDependency TargetName PackageName CPMUri)
   if (DEFINED ${PackageName}_PREBUILT)
     # first check if the <PackageName>_PREBUILT variable has been set, and use that one if so
-    target_include_directories(Antimony3 PUBLIC ${${PackageName}_PREBUILT}/include/${PackageName})
+    message("Checking ${${PackageName}_PREBUILT}...")
+    target_include_directories(Antimony3 PUBLIC ${${PackageName}_PREBUILT}/include/)
     target_link_directories(Antimony3 PUBLIC ${${PackageName}_PREBUILT}/lib)
   else()
     # otherwise, just use CPM
